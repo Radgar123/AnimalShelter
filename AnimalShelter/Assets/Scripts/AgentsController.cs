@@ -7,18 +7,20 @@ public class AgentsController : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Renderer rend;
+    //private AddParametersToAgentInspector addp;
 
     //public GameObject point;
 
     private int maxStartLife = 3;
-    public int actualAgentLife;
+    private int actualAgentLife;
+    private string agentName;
 
     private void Start()
     {
         rend = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
         actualAgentLife = maxStartLife;
-
+        agentName = "Agent" + (int)Random.Range(0,1000);
         ChangeAgentColor();
     }
 
@@ -60,4 +62,9 @@ public class AgentsController : MonoBehaviour
         if (collision.gameObject.tag == "Agent")
             actualAgentLife--;
     }
+
+    public int GetActualAgentLife() { return actualAgentLife; }
+    public string GetName() { return agentName; }
+
+    public Renderer GetRend() { return rend; }
 }
