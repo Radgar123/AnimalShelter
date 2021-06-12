@@ -7,10 +7,7 @@ public class AgentsController : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Renderer rend;
-    //private AddParametersToAgentInspector addp;
-
-    //public GameObject point;
-
+    private AddParametersToAgentInspector addp;
     private int maxStartLife = 3;
     private int actualAgentLife;
     private string agentName;
@@ -19,6 +16,7 @@ public class AgentsController : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
+        addp = GameObject.FindWithTag("AgentInspector").transform.gameObject.GetComponent<AddParametersToAgentInspector>();
         actualAgentLife = maxStartLife;
         agentName = "Agent" + (int)Random.Range(0,1000);
         ChangeAgentColor();
@@ -49,10 +47,11 @@ public class AgentsController : MonoBehaviour
 
     private void DestroyAgent()
     {
-        if (this.actualAgentLife < 0)
+        if (this.actualAgentLife <= 0)
         {
             SpawnController.actualNumberOfAgents--;
             Destroy(this.gameObject);
+            addp.ResetParametersWhenDestroyAgent();
         }
 
     }

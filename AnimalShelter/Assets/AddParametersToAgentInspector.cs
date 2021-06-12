@@ -6,25 +6,24 @@ using UnityEngine.UI;
 
 public class AddParametersToAgentInspector : MonoBehaviour
 {
-    public string agentName;
-    public string agentHp;
-    public AgentsController ac;
+    private string agentName;
+    private string agentHp;
+    private AgentsController ac;
+    private Color imageColor;
 
     public TextMeshProUGUI agentNameText;
     public TextMeshProUGUI agentHpText;
     public Image agentIcon;
 
-    public Color imageColor;
+    
 
 
-    // Start is called before the first frame update
     void Start()
     {
         agentNameText.text = "Agent Name";
         agentHpText.text = "HP: ??/??";
     }
 
-    // Update is called once per frame
     void Update()
     {
         ClickOnObject();
@@ -59,6 +58,15 @@ public class AddParametersToAgentInspector : MonoBehaviour
         agentNameText.text = ac.GetName();
         agentHpText.text = "HP: " + ac.GetActualAgentLife() +"/3";
         imageColor = ac.GetRend().material.color;
+        agentIcon.color = imageColor;
+    }
+
+    public void ResetParametersWhenDestroyAgent() 
+    {
+        ac = null;
+        agentNameText.text = "Agent Name";
+        agentHpText.text = "HP: ??/??";
+        imageColor = Color.white;
         agentIcon.color = imageColor;
     }
 }
