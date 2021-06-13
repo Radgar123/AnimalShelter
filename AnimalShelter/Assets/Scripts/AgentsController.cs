@@ -13,6 +13,7 @@ public class AgentsController : MonoBehaviour
     private string agentName;
 
     private List<GameObject> pointsToFollow;
+    private int point;
 
     private void Start()
     {
@@ -22,11 +23,12 @@ public class AgentsController : MonoBehaviour
         actualAgentLife = maxStartLife;
         agentName = "Agent" + (int)Random.Range(0,1000);
         ChangeAgentColor();
+        StartCoroutine(WaitForRandomAgentMovement());
     }
 
     private void Update()
     {
-        AgentMovement();
+        //AgentMovement();
         DestroyAgent();
     }
 
@@ -43,9 +45,20 @@ public class AgentsController : MonoBehaviour
 
     private void AgentMovement()
     {
-        GameObject point = GameObject.FindGameObjectWithTag("Follow");
+        //GameObject point = GameObject.FindGameObjectWithTag("Follow");
 
-        agent.destination = point.transform.position;
+        pointsToFollow = new List<GameObject>(GameObject.FindGameObjectsWithTag("Follow"));
+
+        int point = Random.Range(0, pointsToFollow.Count);
+
+        agent.destination = pointsToFollow[point].transform.position;
+    }
+
+    IEnumerator WaitForRandomAgentMovement() 
+    {
+        AgentMovement();
+        yield return new WaitForSeconds(5);
+        StartCoroutine(WaitForRandomAgentMovement());
     }
 
     private void DestroyAgent()

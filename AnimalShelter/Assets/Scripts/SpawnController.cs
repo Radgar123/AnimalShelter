@@ -27,7 +27,7 @@ public class SpawnController : MonoBehaviour
 
     public void SpawnAgentsInPoints()
     {
-        if (actualNumberOfAgents <= maxNumbersOfAgents)
+        if (actualNumberOfAgents < maxNumbersOfAgents)
         {
             int spawnPointID = Random.Range(0, agentSpawnPoints.Count);
             Instantiate(AgentPrefab, agentSpawnPoints[spawnPointID].position, agentSpawnPoints[spawnPointID].rotation);
