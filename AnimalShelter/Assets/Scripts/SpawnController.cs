@@ -25,11 +25,6 @@ public class SpawnController : MonoBehaviour
         StartCoroutine(SpawnFollowingPointInSeconds());
     }
 
-    void Update()
-    {
-
-    }
-
     public void SpawnAgentsInPoints()
     {
         if (actualNumberOfAgents <= maxNumbersOfAgents)
@@ -65,6 +60,7 @@ public class SpawnController : MonoBehaviour
 
     IEnumerator SpawnFollowingPointInSeconds()
     {
+        int waitTime = Random.Range(2, 5);
         SpawnFollowingPointInPoints();
         yield return new WaitForSeconds(5);
         StartCoroutine(SpawnFollowingPointInSeconds());

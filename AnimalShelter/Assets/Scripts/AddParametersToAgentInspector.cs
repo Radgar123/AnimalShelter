@@ -59,6 +59,7 @@ public class AddParametersToAgentInspector : MonoBehaviour
         agentHpText.text = "HP: " + ac.GetActualAgentLife() +"/3";
         imageColor = ac.GetRend().material.color;
         agentIcon.color = imageColor;
+        agentName = ac.GetName();
     }
 
     public void ResetParametersWhenDestroyAgent() 

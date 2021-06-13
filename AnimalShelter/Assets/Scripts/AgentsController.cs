@@ -12,6 +12,8 @@ public class AgentsController : MonoBehaviour
     private int actualAgentLife;
     private string agentName;
 
+    private List<GameObject> pointsToFollow;
+
     private void Start()
     {
         rend = GetComponent<Renderer>();
@@ -42,6 +44,7 @@ public class AgentsController : MonoBehaviour
     private void AgentMovement()
     {
         GameObject point = GameObject.FindGameObjectWithTag("Follow");
+
         agent.destination = point.transform.position;
     }
 
@@ -49,11 +52,11 @@ public class AgentsController : MonoBehaviour
     {
         if (this.actualAgentLife <= 0)
         {
-            if (addp.GetAgentController().GetName() == agentName)
+            if (addp.GetAgentName() == agentName)
                 addp.ResetParametersWhenDestroyAgent();
 
             SpawnController.actualNumberOfAgents--;
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
