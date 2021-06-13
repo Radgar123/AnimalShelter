@@ -49,11 +49,12 @@ public class AgentsController : MonoBehaviour
     {
         if (this.actualAgentLife <= 0)
         {
+            if (addp.GetAgentController().GetName() == agentName)
+                addp.ResetParametersWhenDestroyAgent();
+
             SpawnController.actualNumberOfAgents--;
             Destroy(this.gameObject);
-            addp.ResetParametersWhenDestroyAgent();
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)

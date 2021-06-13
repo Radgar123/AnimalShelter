@@ -69,4 +69,8 @@ public class AddParametersToAgentInspector : MonoBehaviour
         imageColor = Color.white;
         agentIcon.color = imageColor;
     }
+
+    public AgentsController GetAgentController() { return ac; }
+
+    public string GetAgentName() { return agentName; }
 }
